@@ -1,0 +1,39 @@
+name: Feature Addition(s)
+description: These are net new functionalities introduced to the software that extend its capabilities without altering existing behaviors. Feature additions are typically implemented to meet new requirements, address user feedback, or keep the software competitive.
+labels:
+  - feature
+body:
+  - type: markdown
+    attributes:
+      value: |
+        If this is a relatively large or complex feature, please consider starting a [discussion](https://github.legalzoom.com/engineering/discussions) first. Be sure to link any associated ADRs or SDDs here.
+
+  - type: input
+    id: ticket
+    attributes:
+      label: Ticket
+      description: Please provide the ticket or issue that this feature addresses.
+    validations:
+      required: false
+
+  - type: textarea
+    attributes:
+      label: Problem
+      description: A problem well stated is a problem half solved! What problem is this feature addressing?
+
+  - type: textarea
+    attributes:
+      label: Solution
+      description: Please provide a gist of how the code addresses the problem.
+    validations:
+      required: true
+
+  - type: checkboxes
+    attributes:
+      label: Checklist
+      options:
+        - label: Tests have been added to validate the feature(s).
+          required: true
+        - label: Observability has been considered.
+        - label: Documentation has been added where necessary.
+        - label: This branch has been deployed and validated in a Lower Environment.

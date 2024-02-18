@@ -1,0 +1,18 @@
+name: Documentation
+description: No code changes, just adding some clarification.
+labels:
+  - documentation
+body:
+  - type: markdown
+    attributes:
+      value: |
+        While not directly affecting the software's code or functionality, changes to documentation are crucial for supporting the other types of changes. Documentation updates can include new guides for added features, improved instructions for existing features, or corrected inaccuracies in previous documentation versions.
+
+        Thanks for making this project easier to understand!
+
+  - type: textarea
+    attributes:
+      label: Description
+      description: Please provide a gist of the change(s).
+    validations:
+      required: true

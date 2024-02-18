@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Technical Governance Documentation
+    url: https://github.legalzoom.com/engineering/discussions
+    about: Please kick off a discussion here.

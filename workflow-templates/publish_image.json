@@ -1,0 +1,7 @@
+{
+  "name": "Publish Docker Image",
+  "description": "Build, tag, and push image",
+  "iconName": "docker.svg",
+  "categories": [],
+  "filePatterns": []
+}

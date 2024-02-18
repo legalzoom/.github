@@ -1,0 +1,16 @@
+name: Bug Report
+description: File a report to help us improve!
+labels:
+  - bug
+body:
+  - type: textarea
+    attributes:
+      label: Description
+      description: A clear and concise description of what you're seeing vs what you're expecting.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Reproduction
+      description: Can you provide steps to reproduce the issue? Any OS or version specifics that could be relevant?

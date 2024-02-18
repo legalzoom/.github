@@ -1,0 +1,62 @@
+name: Change(s) to Existing Functionality
+description: These alterations do not introduce new capabilities but rather refine or correct the current application's behavior.
+labels:
+  - change
+body:
+  - type: markdown
+    attributes:
+      value: |
+        If this is a relatively large or complex change, please consider starting a [discussion](https://github.legalzoom.com/engineering/discussions) first. Be sure to link any associated ADRs or SDDs here.
+
+  - type: input
+    id: ticket
+    attributes:
+      label: Ticket
+      description: Please provide the ticket or issue that this change addresses.
+    validations:
+      required: false
+
+  - type: dropdown
+    attributes:
+      label: Is this a breaking change?
+      description: These changes alter the software in a way that is not backward compatible, meaning that they can potentially cause existing functionality to fail or change behavior unexpectedly. Breaking changes might involve modifying APIs, removing functionalities, or changing the software's behavior in ways that require users or dependent systems to change their own code or usage patterns.
+      options:
+        - Yes
+        - No
+    validations:
+      required: true
+
+  - type: checkboxes
+    attributes:
+      label: How can the change to the codebase be categorized? Select all that apply.
+      description: By categorizing changes into these broader categories, you can more clearly communicate the nature and impact of changes in software development projects. This categorization helps in planning, executing, and communicating about software updates both internally among the development team and externally with stakeholders and users.
+      options:
+        - label: Enhancements/Improvements
+          description: These changes improve existing features or the software's performance without fundamentally changing its functionality. Enhancements may include optimizations that make the software faster, use less memory, or improve user experience through UI/UX improvements.
+        - label: Bug Fixes
+          description: These are changes made to address defects in the software that cause it to behave unexpectedly or incorrectly. Bug fixes are crucial for maintaining the reliability and stability of the software.
+        - label: Refactoring
+          description: This involves altering the internal structure of the code without changing its external behavior. The goal of refactoring is often to improve code readability, reduce complexity, facilitate future changes, or improve performance without affecting the software's functionality.
+        - label: Deprecations
+          description: This type of change marks certain features, APIs, or functionalities as obsolete or no longer recommended for use, often with an indication that they will be removed in future releases. Deprecations are a way to signal to users that they should start transitioning away from certain elements of the software without immediately breaking those elements.
+        - label: Security Updates
+          description: These changes are made to address vulnerabilities or enhance the security features of the software. Security updates are critical for protecting the software and its users from attacks and unauthorized access.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Description
+      description: Please provide a gist of the change(s).
+    validations:
+      required: true
+
+  - type: checkboxes
+    attributes:
+      label: Checklist
+      options:
+        - label: Tests have been added or updated to validate the change(s).
+          required: true
+        - label: Observability has been considered.
+        - label: Documentation has been added where necessary.
+        - label: This branch has been deployed and validated in a Lower Environment.

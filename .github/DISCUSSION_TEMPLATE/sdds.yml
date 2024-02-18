@@ -1,0 +1,59 @@
+title: "YYMMDD: <DOCUMENT NAME>"
+labels:
+  - proposed
+body:
+  - type: markdown
+    attributes:
+      description: |
+        This Software Design Document (SDD) provides a comprehensive outline of the design for this project. It serves as a guide for stakeholders to understand the architecture, components, and operations of the system. This document is intended to be a dynamic resource, updated throughout the development process to reflect design decisions, changes, and refinements.
+
+        The purpose of the SDD is to ensure that the software architecture aligns with the project objectives and stakeholder requirements. It aims to detail the system architecture, design considerations, and specifications of the software components, providing a technical blueprint for the development team.
+
+  - type: textarea
+    attributes:
+      label: Introduction
+      description: This section provides an overview of the entire document, including its purpose, scope, definitions, acronyms, abbreviations, and references. It gives the reader a context for what the document will cover and how it fits into the project lifecycle.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Architectural Overview
+      description: This section outlines the high-level architecture of the software system, including major components and their interactions. It should also describe any architectural styles or patterns being employed, such as microservices or monolithic architecture, using synchronous or asynchronous communication.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Design Considerations
+      description: This section discusses the considerations taken into account during the design process, such as performance, scalability, reliability, and security. It may also cover design principles and decisions that have influenced the overall architecture and component design.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Detailed Design
+      description: This section provides a detailed description of each component of the system. For each component, include its responsibilities, interfaces, data models, and interaction with other components. Diagrams and code snippets can be included to aid understanding.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Data Design
+      description: This section describes the data architecture of the system, including data models, data storage decisions, and data flow diagrams. It should detail how data is organized, stored, and accessed by the system.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Security Design
+      description: This section outlines the security measures and strategies implemented within the software design, covering aspects such as authentication, authorization, data encryption, and secure communication protocols.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Conclusion
+      description: This section summarizes the key points of the document and any final thoughts. It may also suggest areas for future work or improvements in the design.
+    validations:
+      required: false

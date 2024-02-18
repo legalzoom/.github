@@ -1,0 +1,21 @@
+body:
+  - type: textarea
+    attributes:
+      label: Problem
+      description: A problem well stated is a problem half solved! What problem is this addressing?
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Solutions
+      description: Please provide some viable solutions you've considered.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Recommendation
+      description: Of the proposed solutions, what is your recommendation?
+    validations:
+      required: true

@@ -1,0 +1,47 @@
+title: "YYMMDD: <DOCUMENT NAME>"
+labels:
+  - proposed
+body:
+  - type: markdown
+    attributes:
+      description: |
+        [Original article regarding Architectural Decision Records (ADR)](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions)
+
+        Architecture for agile projects has to be described and defined differently. Not all decisions will be made at once, nor will all of them be done when the project begins.
+
+        Agile methods are not opposed to documentation, only to valueless documentation. Documents that assist the team itself can have value, but only if they are kept up to date. Large documents are never kept up to date. Small, modular documents have at least a chance at being updated.
+
+        Nobody ever reads large documents, either. Most developers have been on at least one project where the specification document was larger (in bytes) than the total source code size. Those documents are too large to open, read, or update. Bite sized pieces are easier for for all stakeholders to consume.
+
+        One of the hardest things to track during the life of a project is the motivation behind certain decisions. A new person coming on to a project may be perplexed, baffled, delighted, or infuriated by some past decision. Without understanding the rationale or consequences, this person has only two choices:
+
+        1. Blindly accept the decision.
+
+            This response may be OK, if the decision is still valid. It may not be good, however, if the context has changed and the decision should really be revisited. If the project accumulates too many decisions accepted without understanding, then the development team becomes afraid to change anything and the project collapses under its own weight.
+
+        2. Blindly change it.
+
+            Again, this may be OK if the decision needs to be reversed. On the other hand, changing the decision without understanding its motivation or consequences could mean damaging the project's overall value without realizing it. (E.g., the decision supported a non-functional requirement that hasn't been tested yet.)
+
+        It's better to avoid either blind acceptance or blind reversal.
+
+  - type: textarea
+    attributes:
+      label: Context
+      description: This section describes the forces at play, including technological, political, social, and project local. These forces are probably in tension, and should be called out as such. The language in this section is value-neutral. It is simply describing facts.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Decision
+      description: This section describes our response to these forces. It is stated in full sentences, with active voice. "We will ..."
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Consequences
+      description: This section describes the resulting context, after applying the decision. All consequences should be listed here, not just the "positive" ones. A particular decision may have positive, negative, and neutral consequences, but all of them affect the team and project in the future.
+    validations:
+      required: true
