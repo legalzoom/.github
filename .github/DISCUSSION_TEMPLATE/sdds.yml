@@ -4,7 +4,7 @@ labels:
 body:
   - type: markdown
     attributes:
-      description: |
+      value: |
         This Software Design Document (SDD) provides a comprehensive outline of the design for this project. It serves as a guide for stakeholders to understand the architecture, components, and operations of the system. This document is intended to be a dynamic resource, updated throughout the development process to reflect design decisions, changes, and refinements.
 
         The purpose of the SDD is to ensure that the software architecture aligns with the project objectives and stakeholder requirements. It aims to detail the system architecture, design considerations, and specifications of the software components, providing a technical blueprint for the development team.
