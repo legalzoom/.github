@@ -4,7 +4,7 @@ labels:
 body:
   - type: markdown
     attributes:
-      description: |
+      value: |
         [Original article regarding Architectural Decision Records (ADR)](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions)
 
         Architecture for agile projects has to be described and defined differently. Not all decisions will be made at once, nor will all of them be done when the project begins.
