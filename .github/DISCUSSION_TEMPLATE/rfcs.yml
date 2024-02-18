@@ -1,8 +1,11 @@
+title: "YYMMDD: <DOCUMENT NAME>"
+labels:
+  - proposed
 body:
   - type: textarea
     attributes:
       label: Problem
-      description: A problem well stated is a problem half solved! What problem is this addressing?
+      description: A problem well stated is a problem half solved! What problem are you addressing?
     validations:
       required: true
 
