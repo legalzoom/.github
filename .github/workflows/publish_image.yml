@@ -8,7 +8,7 @@ env:
 jobs:
   docker:
     name: Docker Image
-    runs-on: ubuntu-latest
+    runs-on: devops
     steps:
       - uses: actions/checkout@v4
       - id: meta
