@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        If this is a relatively large or complex feature, please consider starting a [discussion](https://github.legalzoom.com/engineering/discussions) first. Be sure to link any associated ADRs or SDDs here.
+        If this is a relatively large or complex feature, please consider starting a [discussion](https://github.com/legalzoom/discussions) first. Be sure to link any associated ADRs or SDDs here.
 
   - type: input
     id: ticket
