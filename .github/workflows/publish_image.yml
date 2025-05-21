@@ -4,7 +4,7 @@ on:
 name: Publish Image
 
 env:
-  REGISTRY: ghcr.io
+  REGISTRY: artifactory.legalzoom.com
 jobs:
   docker:
     name: Docker Image
