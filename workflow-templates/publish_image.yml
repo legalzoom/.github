@@ -7,4 +7,4 @@ name: Publish Image
 
 jobs:
   docker:
-    uses: engineering/.github/.github/workflows/publish_image.yml@main
+    uses: legalzoom/.github/.github/workflows/publish_image.yml@main
