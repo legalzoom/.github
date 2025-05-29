@@ -1,7 +1,6 @@
 {
-  "name": "Publish Docker Image",
+  "name": "LEGACY Build and Push Docker Image",
   "description": "Build, tag, and push image",
-  "iconName": "docker.svg",
   "categories": [],
   "filePatterns": []
 }
