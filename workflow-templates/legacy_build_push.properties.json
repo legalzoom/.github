@@ -1,6 +1,6 @@
 {
   "name": "LEGACY Build and Push Docker Image",
   "description": "Build, tag, and push image",
-  "categories": [],
+  "categories": ["Continuous integration", "Deployment"],
   "filePatterns": []
 }
