@@ -1,6 +1,6 @@
 # .github
 
-> [!WARNING]  
+> [!IMPORTANT]  
 > This repository **MUST** be public in order to function properly.
 
 ## Defaults
