@@ -1,4 +1,4 @@
-name: LEGACY Build and Push
+name: LEGACY CD for .NET applications
 
 on:
   push:
@@ -13,14 +13,19 @@ permissions:
   statuses: write
 
 jobs:
-  build-and-push:
-    uses: legalzoom/gha-workflows/.github/workflows/docker-build-and-push-legacy-api.yaml@main
+  test:
+    uses: legalzoom/gha-workflows/.github/workflows/dotnet-test.yaml@main
     with:
-      # TODO: Can we infer image-name? Do we need to pass inputs for these? Can we remove tests, since it's already merged?
       image-name: engineering/orderservice-gha
       runs-on: ${{ github.repo }}-arm64
-      source-folder: ./src/OrderService
-      test-folder: ./src/Tests/Test.Order
+      restore-target: ./change/me
+      test-target: ./change/me
+      
+  build-and-push:
+    uses: legalzoom/gha-workflows/.github/workflows/docker-build-and-push.yaml@main
+    with:
+      image-name: engineering/orderservice-gha
+      runs-on: ${{ github.repo }}-arm64
 
   deploy-to-k8s-dev:
     name: Deploy to Kubernetes
@@ -42,20 +47,9 @@ jobs:
       stage-name: "qa"
       runs-on: ${{ github.repo }}
 
-  manual-approval:
-    name: Manual Approval for Production
-    needs: [deploy-to-k8s-qa]
-    runs-on: ${{ github.repo }}
-    steps:
-      - name: Wait for manual approval
-        run: |
-          echo "Waiting for manual approval..."
-    environment:
-      name: prd
-
   deploy-to-k8s-prd:
     name: Deploy to Kubernetes
-    needs: [manual-approval]
+    needs: [deploy-to-k8s-qa]
     uses: legalzoom/gha-workflows/.github/workflows/deploy-to-k8s.yaml@main
     with:
       image-tag: ${{ github.sha }}
