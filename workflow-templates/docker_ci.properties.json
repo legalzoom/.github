@@ -1,0 +1,6 @@
+{
+  "name": "CI",
+  "description": "Utilize docker compose to run tests and ensure build",
+  "categories": ["integration"],
+  "filePatterns": []
+}
