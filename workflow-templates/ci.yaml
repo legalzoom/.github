@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - $default-branch
+
+permissions:
+  contents: write
+  id-token: write
+  checks: write
+  statuses: write
+
+jobs:
+  test:
+    uses: legalzoom/gha-workflows/.github/workflows/dotnet-test.yaml@main
+    with:
+      restore-target: ./change/me
+      test-target: ./change/me
+
+  build:
+    needs: [ test ]
+    uses: legalzoom/gha-workflows/.github/workflows/docker-build-and-push.yaml@main
+    with:
+      push-image: false
