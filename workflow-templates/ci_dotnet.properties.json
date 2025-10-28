@@ -1,5 +1,5 @@
 {
-  "name": ".NET CI",
+  "name": "Continuous Integration for .NET applications",
   "description": "Run tests. Ensure build",
   "categories": ["integration"],
   "filePatterns": []
