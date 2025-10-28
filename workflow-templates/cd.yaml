@@ -1,0 +1,37 @@
+name: Continuous Deployment
+
+on:
+  push:
+    branches:
+      - $default-branch
+
+permissions:
+  contents: write
+  id-token: write
+  checks: write
+  statuses: write
+
+jobs:
+  build-and-push:
+    uses: legalzoom/gha-workflows/.github/workflows/docker-build-and-push.yaml@main
+
+  deploy-to-dev:
+    name: Deploy to Kubernetes
+    needs: [ build-and-push ]
+    uses: legalzoom/gha-workflows/.github/workflows/deploy-to-k8s.yaml@main
+    with:
+      stage-name: "dev"
+
+  deploy-to-qa:
+    name: Deploy to Kubernetes
+    needs: [ build-and-push ]
+    uses: legalzoom/gha-workflows/.github/workflows/deploy-to-k8s.yaml@main
+    with:
+      stage-name: "qa"
+
+  deploy-to-prd:
+    name: Deploy to Kubernetes
+    needs: [ deploy-to-qa ]
+    uses: legalzoom/gha-workflows/.github/workflows/deploy-to-k8s.yaml@main
+    with:
+      stage-name: "prd"

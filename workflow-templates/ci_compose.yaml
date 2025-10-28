@@ -1,0 +1,16 @@
+name: Continuous Integration
+
+on:
+  pull_request:
+    branches:
+      - $default-branch
+
+permissions:
+  contents: write
+  id-token: write
+  checks: write
+  statuses: write
+
+jobs:
+  test:
+    uses: legalzoom/gha-workflows/.github/workflows/docker-test.yaml@main

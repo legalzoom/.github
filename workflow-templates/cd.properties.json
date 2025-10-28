@@ -1,0 +1,6 @@
+{
+  "name": "Continuous Deployment",
+  "description": "Build, tag, and push image",
+  "categories": ["integration", "deployment"],
+  "filePatterns": []
+}
