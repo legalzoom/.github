@@ -1,5 +1,5 @@
 {
-  "name": "Test .NET. Build and Push Docker Image",
+  "name": "Build and Push Docker Image",
   "description": "Build, tag, and push image",
   "categories": ["Continuous integration", "Deployment"],
   "filePatterns": []
