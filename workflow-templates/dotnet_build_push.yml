@@ -1,4 +1,4 @@
-name: LEGACY CD for .NET applications
+name: CD for .NET applications
 
 on:
   push:
@@ -15,43 +15,29 @@ jobs:
   test:
     uses: legalzoom/gha-workflows/.github/workflows/dotnet-test.yaml@main
     with:
-      image-name: engineering/orderservice-gha
-      runs-on: ${{ github.repo }}-arm64
       restore-target: ./change/me
       test-target: ./change/me
       
   build-and-push:
     uses: legalzoom/gha-workflows/.github/workflows/docker-build-and-push.yaml@main
-    with:
-      image-name: engineering/orderservice-gha
-      runs-on: ${{ github.repo }}-arm64
 
   deploy-to-k8s-dev:
     name: Deploy to Kubernetes
-    needs: [build-and-push]
+    needs: [ build-and-push ]
     uses: legalzoom/gha-workflows/.github/workflows/deploy-to-k8s.yaml@main
     with:
-      image-tag: ${{ github.sha }}
-      image-names: "image_name_gha"
       stage-name: "dev"
-      runs-on: ${{ github.repo }}
 
   deploy-to-k8s-qa:
     name: Deploy to Kubernetes
-    needs: [build-and-push]
+    needs: [ build-and-push ]
     uses: legalzoom/gha-workflows/.github/workflows/deploy-to-k8s.yaml@main
     with:
-      image-tag: ${{ github.sha }}
-      image-names: "image_name_gha"
       stage-name: "qa"
-      runs-on: ${{ github.repo }}
 
   deploy-to-k8s-prd:
     name: Deploy to Kubernetes
-    needs: [deploy-to-k8s-qa]
+    needs: [ deploy-to-k8s-qa ]
     uses: legalzoom/gha-workflows/.github/workflows/deploy-to-k8s.yaml@main
     with:
-      image-tag: ${{ github.sha }}
-      image-names: "image_name_gha"
       stage-name: "prd"
-      runs-on: ${{ github.repo }}
