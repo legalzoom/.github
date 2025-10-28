@@ -1,5 +1,5 @@
 {
-  "name": "CI",
+  "name": "Continuous Integration for Docker Compose",
   "description": "Utilize docker compose to run tests and ensure build",
   "categories": ["integration"],
   "filePatterns": []
