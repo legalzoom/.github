@@ -1,4 +1,4 @@
-name: CI for .NET applications
+name: Continuous Integration
 
 on:
   pull_request:
