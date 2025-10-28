@@ -1,0 +1,6 @@
+{
+  "name": "CI",
+  "description": "Run tests. Ensure build",
+  "categories": ["Continuous integration"],
+  "filePatterns": []
+}
