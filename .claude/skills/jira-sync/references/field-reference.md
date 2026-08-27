@@ -178,3 +178,18 @@ Reading End Date back requires asking for it — the default field set for
 ```
 
 In JQL the field is quoted by name: `"End Date" IS EMPTY`.
+
+## Ownership check before any write
+
+The board is shared and most tickets on it belong to other people. Before the
+first write to a ticket referred to by key, confirm it's the user's:
+
+```json
+{"cloudId": "legalzoom.atlassian.net", "issueIdOrKey": "EAI-42",
+ "fields": ["assignee", "reporter", "summary"]}
+```
+
+Compare `assignee.accountId` against the `account_id` from `atlassianUserInfo`.
+For queries, scope with `assignee = currentUser()` rather than filtering after
+the fact — `currentUser()` resolves server-side and can't drift out of sync
+with whoever is running the skill.

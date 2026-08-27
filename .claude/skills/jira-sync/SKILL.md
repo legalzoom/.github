@@ -9,10 +9,11 @@ description: >-
   the EAI board or project; mentions "EAI-" followed by a number; asks to move a
   ticket to In Progress / Needs Review / Done or close one out; asks to link a
   ticket to a GitHub branch or PR; asks whether some piece of work even deserves
-  a ticket; or asks to audit the board for tickets missing required fields. Also
+  a ticket; or asks to audit their own tickets for missing required fields. Also
   use it when the user describes analytics or data work they just finished or
   are about to start and wants it tracked, even if they never say the word
-  "Jira".
+  "Jira". The board is shared with the rest of the team, so this skill only ever
+  writes to the user's own tickets.
 ---
 
 # EAI Jira board sync
@@ -33,12 +34,42 @@ Pass `legalzoom.atlassian.net` as `cloudId` to the Atlassian MCP tools. It
 resolves to the site directly, which avoids hardcoding the site UUID in a file
 that lives in a public repository.
 
-The default assignee is the board owner, Kyle Schonenberg (`kgenovese@`). When
-the user says "me" or doesn't name anyone, resolve the account with
-`atlassianUserInfo` and use the returned `account_id` as `assignee_account_id`.
-That way the skill self-assigns to whoever is running it without an account ID
-being written down here. If a ticket needs to go to a *different* person, look
-them up with `lookupJiraAccountId`.
+Resolve the user's own account once per session with `atlassianUserInfo` and use
+the returned `account_id` as `assignee_account_id`. New tickets are self-assigned
+by default. That keeps an account ID out of this file, and it means the skill
+follows whoever is running it rather than a hardcoded name.
+
+## Scope: the user's own tickets only
+
+The EAI board is shared — most tickets on it belong to other people. The user
+manages their own work on it and nobody else's, so **every write is scoped to
+tickets assigned to them.**
+
+Concretely:
+
+- **Create** — self-assign. If the work really belongs to someone else, say so
+  and let the user decide; don't quietly assign a ticket to a teammate.
+- **Edit, transition, close, relabel, re-prioritize, set dates** — only where
+  `assignee = currentUser()`. Before the first write to a ticket the user
+  referred to by key, check the assignee, because a mistyped key (`EAI-4`
+  vs `EAI-41`) can easily land on a colleague's ticket.
+- **Read** — unrestricted. Reading the whole board is how the skill learns the
+  label vocabulary and finds related work, and is worth doing.
+
+When the user asks for something that would write to a ticket that isn't
+theirs, don't just refuse — tell them whose it is and offer what you *can* do:
+a comment on the ticket, or a summary they can pass along. Editing a
+colleague's ticket is the kind of thing that's technically permitted by Jira
+and genuinely unwelcome in practice, which is exactly why it needs a rule
+rather than judgement in the moment.
+
+The one exception is a ticket the user reported but assigned to someone else —
+they have a legitimate claim to its description and priority. Confirm before
+writing to it rather than assuming.
+
+If a ticket needs to be assigned to a different person, look them up with
+`lookupJiraAccountId` — but treat handing work to someone else as the user's
+call to make explicitly, not a default.
 
 ## Step 1: Does this deserve a ticket?
 
@@ -177,6 +208,9 @@ Transition IDs are in `references/field-reference.md`. `Needs Review` is unused
 so far but is the natural home for a ticket whose PR is open and awaiting
 review.
 
+Check the assignee before transitioning a ticket the user named by key — moving
+a colleague's ticket to Done is a conspicuous thing to do by accident.
+
 When work finishes, closing out is **two** operations, and the second is the
 one that gets forgotten:
 
@@ -189,26 +223,38 @@ status. Use the real completion date, not today's date, if they differ. When
 transitioning a ticket to Done and the user hasn't given a date, ask rather
 than assuming — or set today's and say so, so they can correct it.
 
-## Auditing the board
+## Auditing the user's tickets
 
-When asked to check the board's health, query with `searchJiraIssuesUsingJql`
-and report gaps against the mandate. The ones worth flagging:
+When asked to check for gaps against the mandate, query with
+`searchJiraIssuesUsingJql`. Every audit query carries
+`assignee = currentUser()` — without it these return the whole team's tickets,
+which is both noise and a temptation to "fix" work that isn't the user's.
 
 ```sql
 -- Done but no End Date: the close-out that got missed
-project = EAI AND status = Done AND "End Date" IS EMPTY
+project = EAI AND assignee = currentUser() AND status = Done
+  AND "End Date" IS EMPTY
 
 -- No due date: unplannable
-project = EAI AND statusCategory != Done AND duedate IS EMPTY
+project = EAI AND assignee = currentUser() AND statusCategory != Done
+  AND duedate IS EMPTY
 
 -- Missing labels, or on the wrong-priority trap
-project = EAI AND (labels IS EMPTY OR priority IN ("P3", "P1", "P5"))
+project = EAI AND assignee = currentUser()
+  AND (labels IS EMPTY OR priority IN ("P3", "P1", "P5"))
 ```
 
 That last one catches tickets on the legacy bare-name priorities that should be
 the `P<n> - <Name>` variants instead. Fetch the description too and note
-tickets that don't follow either template — but propose fixes in a batch for
-the user to approve rather than editing other people's tickets unprompted.
+tickets that don't follow either template.
+
+Propose the fixes as a batch for the user to approve, then apply them — they're
+the user's own tickets, but a sweep of silent edits is still unpleasant to
+discover after the fact.
+
+Dropping `assignee = currentUser()` is reasonable when the user explicitly
+asks how the *board* is doing overall — a read-only question. Report what you
+find and stop there; don't follow a board-wide audit with fixes.
 
 ## Reference files
 
